@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - RestoBook</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #1a1a1a;
+            background-color: #f4f6f7;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: white;
+        }
+
+        .header-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .logo {
+            height: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #ecf0f1;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #C00000;
+        }
+
+        .action-button {
+            padding: 8px 20px;
+            border: 2px solid #C00000;
+            color: #C00000;
+            background-color: transparent;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 10px;
+        }
+
+        .action-button:hover {
+            background-color: #C00000;
+            color: #fff;
+        }
+
+        main {
+            padding: 40px 60px;
+            background-color: #fff;
+        }
+
+        #about .about-header h3 {
+            font-size: 32px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            color: #34495e;
+        }
+
+        #about .about-header span {
+            color: #C00000;
+        }
+
+        #about .about-content {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            align-items: center;
+        }
+
+        #about .about-content img {
+            max-width: 45%;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #about .about-text {
+            max-width: 50%;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+
+        #about .about-text p {
+            margin-bottom: 20px;
+        }
+
+        #about .about-text ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #about .about-text ul li {
+            margin: 10px 0;
+            font-size: 18px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        #about .about-text ul li::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
+            color: #C00000;
+            font-size: 22px;
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%
+        }
+
+        .footer-logo {
+            height: 40px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #C00000;
+        }
+
+        @media (max-width: 768px) {
+            .header, .footer {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+            .nav-menu {
+                flex-direction: column;
+                gap: 10px;
+            }
+            #about .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            #about .about-content img, #about .about-text {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <a href="{{ url_for('home') }}">
+                <img src= "/static/images/resto.png" alt="RestoBook Logo" class="footer-logo">
+            </a>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="{{ url_for('search') }}">Home</a>
+            <a href="{{ url_for('aboutResto') }}">About</a>
+            <a href="{{ url_for('contactingResto') }}">Contact</a>
+        </nav>
+
+        <div>
+            <a href="{{ url_for('logIN') }}" class="action-button">Login</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="about">
+            <div class="about-header">
+                <h3>About <span>RestoBook</span></h3>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        <b>RestoBook</b> is your ultimate guide to discovering the best restaurants around you. With an easy-to-use platform, you can search, compare, and reserve your favorite dining spots seamlessly.
+                    </p>
+                    <ul>
+                        <li>Effortless restaurant search and booking</li>
+                        <li>Discover top-rated and trending places</li>
+                        <li>Instant redirection to restaurant pages</li>
+                    </ul>
+                    <p>
+                        Whether you're planning a romantic dinner, a family outing, or just grabbing a quick bite, RestoBook ensures that finding the perfect spot is just a few clicks away.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <a href="{{ url_for('home') }}">
+                <img src= "/static/images/resto.png" alt="RestoBook Logo" class="footer-logo">
+            </a>
+            <div class="social-links">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+        <p>&copy; 2024 RestoBook. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

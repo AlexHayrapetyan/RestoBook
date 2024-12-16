@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Search</title>
+  <style>
+    /* General Styles */
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px; /* Match footer padding */
+      background-color: white;
+    }
+
+    .header-logo {
+      margin-right: auto; /* Align logo to the leftmost side */
+    }
+
+    .header-logo .logo {
+      height: 40px; /* Same height as the footer logo */
+    }
+
+/* Center Navbar */
+    .nav-menu {
+      display: flex;
+      justify-content: center;
+      flex-grow: 1; /* Allow navbar to grow and center itself */
+      gap: 30px;
+    }
+
+    .nav-menu a {
+      color: #333;
+      font-size: 16px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-menu a:hover {
+      color: #C00000;
+    }
+
+    .actions .login-button {
+      margin-left: 10px;
+      padding: 8px 20px;
+      border: 1px solid #C00000;
+      background-color: transparent;
+      color: #C00000;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .actions .login-button:hover {
+      background-color: #C00000;
+      color: white;
+    }
+
+    /* Search Section */
+    .search-section {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .search-section h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: #C00000;
+    }
+
+    .search-section p {
+      margin-bottom: 30px;
+    }
+
+    #search-form {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    #search-input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 300px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: #C00000;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #C00000;
+    }
+
+    /* Footer styles */
+    .footer {
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto; /* Makes footer stick to the bottom */
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .footer-logo {
+      height: 40px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .social-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #C00000;
+    }
+
+    .footer-right {
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+
+    @media (max-width: 768px) {
+      .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-logo">
+      <a href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='images/resto.png') }}" alt="Delicious Logo" class="logo">
+      </a>
+    </div>
+  
+    <nav class="nav-menu">
+      <a href="{{ url_for('search') }}">Home</a>
+      <a href="{{ url_for('aboutResto') }}">About</a>
+      <a href="#" onclick="promptMenuSelection(event)">Menu</a>
+      <a href="{{ url_for('contactingResto') }}">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Search Section -->
+  <section class="search-section">
+    <h1>Find Your Favorite Restaurant</h1>
+    <p>Search and explore restaurants near you.</p>
+    <form id="search-form" action="{{ url_for('search') }}" method="POST">
+      <input type="text" id="search-input" placeholder="Enter restaurant name..." required>
+      <button type="submit" class="btn">Search</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <a href="/"> 
+          <img src="{{ url_for('static', filename='images/resto.png') }}" alt="RestoBook Logo" class="footer-logo">
+        </a>
+        <div class="social-links">
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">TikTok</a>
+          <a href="#">Facebook</a>
+        </div>
+      </div>
+      <p class="footer-right">&copy; 2024 Delicious. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Search Form Submission
+    document.getElementById('search-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const searchValue = document.getElementById('search-input').value.trim();
+
+      if (searchValue.toLowerCase() === 'delicious') {
+        const link = document.createElement('a');
+        link.href = 'https://127.0.0.1/home'; // Replace with your desired URL
+        link.click();
+      } else {
+        alert("Restaurant not found.");
+      }
+    });
+
+    // Prompt Menu Selection
+    function promptMenuSelection(event) {
+      event.preventDefault();
+      alert("Please choose a restaurant first before viewing the menu.");
+    }
+  </script>
+</body>
+</html>

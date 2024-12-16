@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delicious - Book a Table</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+
+    nav ul li {
+      margin: 0 10px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+      text-decoration-color: #C00000;
+    }
+
+    .actions .button,
+    .actions .button-outline {
+      padding: 8px 15px;
+      border: 2px solid #C00000;
+      background-color: transparent;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #010101;
+      transition: background-color 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+
+    .actions .button:hover,
+    .actions .button-outline:hover {
+      background-color: #C00000;
+      color: #010101;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .booking-section {
+      max-width: 1000px;
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      gap: 90px; /* Space between image and form */
+    }
+
+    .booking-section h1 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .booking-section h1 .text-black {
+      color: #000000;
+    }
+
+    .booking-section h1 .text-red {
+      color: #C00000;
+    }
+
+    .floor-plan {
+      width: 450px; /* Adjusted width for the image */
+      height: auto; /* Maintain aspect ratio */
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .booking-form-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .booking-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 350px;
+      width: 100%;
+    }
+
+    .booking-form input,
+    .booking-form select,
+    .booking-form button {
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .booking-form button {
+      background-color: transparent;
+      border: 2px solid #C00000;
+      color: #010101;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .booking-form button:hover {
+      background-color: #C00000;
+      color: #010101;
+    }
+
+    .error-message {
+      color: #C00000;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 10px 20px;
+      background: #333;
+      color: #fff;
+    }
+
+    .footer-logo {
+      height: 40px; /* Same height as header logo */
+      margin-right: 20px; /* Add some space between logo and social links */
+    }
+
+    .social-links {
+      margin-inline: auto; /* Push the social links to the right */
+    }
+
+    .social-links a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    footer p {
+      margin-inline-end: 10px;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .actions {
+        margin-top: 10px;
+      }
+
+      .booking-section {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .booking-section h1 {
+        text-align: center;
+      }
+
+      .floor-plan {
+        width: 100%; /* Make image responsive */
+        max-width: 450px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <a href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='images/D2.png') }}" alt="Delicious Logo" class="logo">
+    </a>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('menu')}}">Menu</a></li>
+        <li><a href="{{ url_for('contacting') }}">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="actions">
+      <a href="#book-table" class="button">Book a Table</a>
+      <a href="#login" class="button-outline">Login</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="booking-section">
+      <img src="{{ url_for('static', filename='images/fp.png') }}" alt="Floor Plan" class="floor-plan">
+      <div class="booking-form-container">
+        <h1>
+          <span class="text-black">Book a </span>
+          <span class="text-red">Table</span>
+        </h1>
+
+        <!-- Error message displayed here -->
+        {% if error %}
+          <div class="error-message">{{ error }}</div>
+        {% endif %}
+
+        <form class="booking-form" action="/reservation" method="POST">
+          <input type="date" name="date" placeholder="Visiting Date" required>
+          <input type="time" name="time" placeholder="Visiting Time" required>
+          <input type="number" name="people" placeholder="# of people" min="1" required>
+          <input type="number" name="table" placeholder="Table Number" min="1" max="18" required>
+          <button type="submit">Book a Table</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <a href="/home">
+      <img src="{{ url_for('static', filename='images/D1.png') }}" alt="Delicious Logo" class="logo">
+    </a>
+    <div class="social-links">
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">TikTok</a>
+    </div>
+    <p>&copy; 2024 Delicious. All Rights Reserved</p>
+  </footer>
+</body>
+</html>

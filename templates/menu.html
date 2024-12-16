@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: white;
+        }
+
+        .header-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo {
+            height: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover {
+            color: #C00000;
+        }
+
+        .login-button {
+            padding: 8px 20px;
+            border: 2px solid #C00000;
+            color: black;
+            background-color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 10px;
+        }
+
+        .login-button:hover {
+            background-color: #C00000;
+            color: white;
+        }
+
+        .menu-section {
+            flex: 1;
+            padding: 40px 50px;
+            background-color: #fff;
+        }
+
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-title {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 20px;
+            font-family: Asap Condensed;
+        }
+
+        .menu-title .highlight {
+            color: #C00000;
+        }
+
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
+        .menu-categories a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            transition: color 0.3s, border-bottom 0.3s;
+            font-family: Inter;
+        }
+
+        .menu-categories a:hover {
+            color: #C00000;
+        }
+
+        .menu-items {
+            display: flex;
+            width: 1200px;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .menu-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 10px 0;
+        }
+
+        .menu-item img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .menu-item .item-name {
+            flex: 1;
+            font-size: 25px;
+            font-weight: bold;
+            margin-right: 15px;
+            font-family: Inter;
+        }
+
+        .menu-item .dots {
+            border-bottom: 2px dotted black;
+            flex-grow: 6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-item .price {
+            font-size: 1rem;
+            font-weight: bold;
+            color: black;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
+
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px 50px;
+            background: #333;
+            color: #fff;
+        }
+
+        .footer-logo {
+            height: 40px;
+            margin-right: 20px;
+        }
+
+        .social-links {
+            margin-inline: auto;
+        }
+
+        .social-links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        footer p {
+            margin-inline-end: 10px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .actions {
+                margin-top: 10px;
+            }
+
+            .booking-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .booking-section h1 {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/D2.png') }}" alt="Delicious Logo" class="logo">
+            </a>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('menu') }}">Menu</a>
+            <a href="{{ url_for('contacting') }}">Contact</a>
+        </nav>
+
+        <div class="actions">
+            <a href="{{ url_for('reservation') }}" class="login-button">Book a Table</a>
+            <a href="{{ url_for('logIN') }}" class="login-button">Login</a>
+        </div>
+    </header>
+
+    <section class="menu-section">
+        <div class="menu-container">
+            <h2 class="menu-title">Check Our <span class="highlight">Tasty</span><br> Menu</h2>
+            <div class="menu-categories">
+                <a href="#" class="active">Pasta</a>
+                <a href="#">Combo</a>
+                <a href="#">Pizza</a>
+                <a href="#">Burger</a>
+                <a href="#">Beverages</a>
+            </div>
+            <div class="menu-items">
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{{ url_for('static', filename='images/bolognese.jpg') }}" alt="Bolognese">
+                        <span class="item-name">Bolognese</span>
+                        <span class="dots"></span>
+                        <span class="price">AMD 2800</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="{{ url_for('static', filename='images/spagetti.jpg') }}" alt="Aglio olio">
+                        <span class="item-name">Aglio olio</span>
+                        <span class="dots"></span>
+                        <span class="price">AMD 1700</span>
+                    </div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{{ url_for('static', filename='images/shimpretto.jpg') }}" alt="Shrimpetto">
+                        <span class="item-name">Shrimpetto</span>
+                        <span class="dots"></span>
+                        <span class="price">AMD 4200</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="{{ url_for('static', filename='images/carbonara.jpg') }}" alt="Carbonara">
+                        <span class="item-name">Carbonara</span>
+                        <span class="dots"></span>
+                        <span class="price">AMD 2000</span>
+                    </div>
+                </div>
+                <div class="menu-row">
+                    <div class="menu-item">
+                        <img src="{{ url_for('static', filename='images/alfredo.jpg') }}" alt="Alfredo">
+                        <span class="item-name">Alfredo</span>
+                        <span class="dots"></span>
+                        <span class="price">AMD 2100</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="{{ url_for('static', filename='images/cacio.jpg') }}" alt="Cacio">
+                        <span class="item-name">Cacio</span>
+                        <span class="dots"></span>
+                        <span class="price">AMD 1500</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="/home">
+            <img src="{{ url_for('static', filename='images/D1.png') }}" alt="Delicious Logo" class="logo">
+        </a>
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+        </div>
+        <p>&copy; 2024 Delicious. All Rights Reserved</p>
+    </footer>
+</body>
+</html>

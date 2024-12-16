@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Delicious</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: white;
+        }
+
+        .header-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo {
+            height: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover {
+            color: #C00000;
+        }
+
+        .login-button {
+            padding: 8px 20px;
+            border: 2px solid #C00000;
+            color: black;
+            background-color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 10px;
+        }
+
+        .login-button:hover {
+            background-color: #C00000;
+            color: white;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        #about .about-header h3 {
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-left: 70px;
+        }
+
+        #about .about-header span {
+            color:  #C00000;
+        }
+
+        #about .about-content {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        #about .about-content img {
+            max-width: 40%;
+            border-radius: 8px;
+            margin-left: 70px;
+        }
+
+        #about .about-text p {
+            margin: 10px 0;
+            line-height: 1.6;
+            font-size: 20px;
+        }
+
+        .about-text {
+            width: 700px;
+            margin-top: 40px;
+        }
+
+        #about .about-text ul {
+            list-style: none;
+            padding: 0;
+            font-size: 20px;
+        }
+
+        #about .about-text ul li {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+
+        .footer {
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .footer-logo {
+            height: 40px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #C00000;
+        }
+
+        .footer-right {
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/D2.png') }}" alt="Delicious Logo" class="logo">
+            </a>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('menu') }}">Menu</a>
+            <a href="{{ url_for('contacting') }}">Contact</a>
+        </nav>
+
+        <div class="actions">
+            <!-- Updated href to correctly redirect using Flask's url_for -->
+            <a href="{{ url_for('reservation') }}" class="login-button">Book a Table</a>
+            <a href="{{ url_for('logIN') }}" class="login-button">Login</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="about">
+            <div class="about-header">
+                <h3>About <span>us</span></h3>
+            </div>
+            <div class="about-content">
+                <img src="{{ url_for('static', filename='images/bar_output.png') }}" alt="Menu Image">
+                <div class="about-text">
+                    <p>
+                        Welcome to <b>Delicious</b>, where families come together to indulge in the tastiest fast food
+                        treats! Delicious is a popular local fast food restaurant known for its family-friendly
+                        atmosphere and affordable, tasty food.
+                    </p>
+                    <ul>
+                        <li>✔️ Daily meal deals and combo offers options</li>
+                        <li>✔️ Reduced waiting time</li>
+                        <li>✔️ Top-notch customer service</li>
+                    </ul>
+                    <p>
+                        With friendly and swift service, Delicious aims to get customers their food fast but not in a
+                        rushed way. This restaurant provides a relaxed dining-in experience with cozy booths, plus
+                        drive-thru and takeout service. It's the perfect place for the whole family.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <a href="{{ url_for('home') }}">
+                    <img src="{{ url_for('static', filename='images/D1.png') }}" alt="Delicious Logo" class="logo">
+
+                </a>
+                <div class="social-links">
+                    <a href="#">Instagram</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">TikTok</a>
+                </div>
+            </div>
+            <p class="footer-right">&copy; 2024 Delicious. All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+
+</html>

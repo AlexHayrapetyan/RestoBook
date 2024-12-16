@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Rating</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+        .rating-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h2 {
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .star {
+            font-size: 32px;
+            cursor: pointer;
+            color: #ccc;
+            transition: color 0.3s;
+        }
+
+        .star:hover,
+        .star.selected,
+        .star.active {
+            color: #f39c12;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            resize: none;
+            font-size: 16px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #thanks-message {
+            color: #28a745;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="rating-container">
+    <h2>Rate Our Restaurant</h2>
+    <div class="stars" id="star-rating">
+        <span data-value="1" class="star">★</span>
+        <span data-value="2" class="star">★</span>
+        <span data-value="3" class="star">★</span>
+        <span data-value="4" class="star">★</span>
+        <span data-value="5" class="star">★</span>
+    </div>
+    <textarea id="feedback" placeholder="Leave a comment..." rows="4"></textarea>
+    <button onclick="submitFeedback()">Submit</button>
+    <p id="thanks-message" class="hidden">Thank you for your feedback!</p>
+</div>
+
+<script>
+    // Rating Functionality
+    const stars = document.querySelectorAll('.star');
+    let rating = 0;
+
+    stars.forEach((star, index) => {
+        star.addEventListener('click', () => {
+            rating = index + 1;
+            updateStars(rating);
+        });
+
+        star.addEventListener('mouseover', () => {
+            updateStars(index + 1);
+        });
+
+        star.addEventListener('mouseleave', () => {
+            updateStars(rating);
+        });
+    });
+
+    function updateStars(rating) {
+        stars.forEach((star, index) => {
+            star.classList.toggle('active', index < rating);
+        });
+    }
+
+    // Feedback Submission
+    function submitFeedback() {
+        const feedbackText = document.getElementById('feedback').value.trim();
+
+        if (rating > 0) {
+            // Display a thank you message
+            document.getElementById('thanks-message').classList.remove('hidden');
+            
+            // Clear the rating and text area after submission
+            rating = 0;
+            updateStars(rating);
+            document.getElementById('feedback').value = '';
+        } else {
+            alert('Please select a star rating.');
+        }
+    }
+</script>
+
+</body>
+</html>

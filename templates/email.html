@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Reminder</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        li {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        strong {
+            color: #333;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            ul {
+                width: 90%;
+                padding: 15px;
+            }
+
+            p, h1 {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello {{ user.username }}!</h1> <!-- Display User Name -->
+    <p>This is a friendly reminder that you have a reservation at our restaurant tomorrow.</p>
+    <p><strong>Reservation Details:</strong></p>
+    <ul>
+        <li><strong>Table Number:</strong> {{ reservation.table_id }}</li> <!-- Table Number -->
+        <li><strong>Date:</strong> {{ reservation.date }} </li> <!-- Reservation Date -->
+        <li><strong>Time:</strong> {{ reservation.reservation_time }} </li> <!-- Reservation Time -->
+    </ul>
+    <p>We look forward to hosting you!</p>
+    <footer>
+        <p>Thank you for choosing our restaurant.</p>
+    </footer>
+</body>
+</html>
